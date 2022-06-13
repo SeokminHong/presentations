@@ -2,7 +2,7 @@
 
 - C++로 게임 개발
 - TypeScript/React로 프론트엔드 개발
-- 모멘티 코리아 이직 후 Elixir 익힘
+- 모멘티 코리아 이직 후 Elixir 시작
 - Elixir/Phoenix LiveView를 사용, 웹 기반 에디터 구현
 - Rustler 프로젝트 기여자
 
@@ -11,7 +11,7 @@
 ## NIFs?
 
 - Native Implemented Functions
-- C로 구현된 shared dynamic library를 Erlang에서 호출
+- C로 구현된 dynamic library를 Erlang에서 호출
 - 런타임에 Erlang 모듈에 연결됨
 
 ---
@@ -21,7 +21,7 @@
 - NIF는 Erlang 에뮬레이터 프로세스에 로드됨
 - NIF를 호출할 때 context switch가 없음
 - NIF에서 크래시가 발생하면 에뮬레이터 프로세스가 죽음
-- 따라서 동기적, 짧은 작업 시간, side effect가 없는 함수가 NIF로 적합함
+- 동기적, 짧은 작업 시간, side effect가 없는 함수가 NIF로 적합함
 
 ---
 
@@ -471,3 +471,19 @@ end
 ```
 
 ✅
+
+---
+
+## References
+
+- Erlang NIFs Document: https://www.erlang.org/doc/tutorial/nif.html
+- `erl_nif` manual: https://www.erlang.org/doc/man/erl_nif.html
+- Elixir and NIF: a study case: https://dev.to/rodrigocaldeira/elixir-and-nif-a-study-case-2npp
+
+---
+
+## 감사합니다
+
+예제 코드 및 구체적인 구현은 다음 저장소에서 보실 수 있습니다.
+
+https://github.com/SeokminHong/nif-elixir-example
