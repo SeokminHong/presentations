@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>NIF with Rustler</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="stylesheet" href="../reveal.js/dist/reveal.css" />
+    <link
+      rel="stylesheet"
+      href="../reveal.js/dist/theme/black.css"
+      id="theme"
+    />
+    <link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" />
+    <style>
+      h2 {
+        margin-bottom: 36px;
+      }
+      .reveal .slides h3 {
+        text-align: left;
+        margin-left: 1em;
+        font-size: 1.1em;
+      }
+      ul {
+        margin-top: 36px;
+      }
+      li {
+        margin: 16px 0;
+        word-break: keep-all;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides" style="--r-heading-text-transform: none">
+        <section>
+          <div style="display: flex; flex-direction: column">
+            <h1>NIF with Rustler</h1>
+            <div style="flex: 1 0 180px"></div>
+            <div>홍석민</div>
+            <div style="flex: 1 0 80px"></div>
+            <div
+              style="
+                font-size: 24px;
+                display: flex;
+                justify-content: right;
+                align-items: center;
+              "
+            >
+              <img
+                src="assets/momenti-logo.png"
+                width="128"
+                style="margin: 0"
+              />
+            </div>
+          </div>
+        </section>
+        <section
+          data-markdown="nif.md"
+          data-separator-vertical="^==="
+        ></section>
+      </div>
+    </div>
+
+    <script src="../reveal.js/dist/reveal.js"></script>
+    <script src="../reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="../reveal.js/plugin/highlight/highlight.js"></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        markdown: {
+          smartypants: true,
+        },
+        plugins: [RevealMarkdown, RevealHighlight],
+      }).then(() => {
+        const items = document.getElementsByTagName("li");
+        for (const li of items) {
+          li.classList.add(["fragment"]);
+        }
+      });
+    </script>
+  </body>
+</html>
