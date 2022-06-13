@@ -30,6 +30,12 @@
         margin: 16px 0;
         word-break: keep-all;
       }
+      .hljs-meta {
+        color: #e6e60d;
+      }
+      .hljs-meta-string {
+        color: #a6e22e;
+      }
     </style>
   </head>
   <body>
@@ -77,6 +83,7 @@
           smartypants: true,
         },
         plugins: [RevealMarkdown, RevealHighlight],
+        pdfSeparateFragments: false,
       }).then(() => {
         const items = document.getElementsByTagName("li");
         for (const li of items) {

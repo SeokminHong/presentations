@@ -451,12 +451,10 @@ fn start_some_task(pid: LocalPid) {
         });
     });
 }
-
 #[cfg(feature = "elixir")]
 impl Callback<SomeTask> {
     fn invoke(&self, payload: SomeTaskPayload) {
-        let owned_env = OwnedEnv::new();
-        owned_env.send_and_clear(self.pid, move |env| {
+        OwnedEnv::new().send_and_clear(self.pid, move |env| {
             ("some_task", payload).encode(env)
         });
     }
@@ -484,6 +482,8 @@ end
 
 ## 감사합니다
 
-예제 코드 및 구체적인 구현은 다음 저장소에서 보실 수 있습니다.
+예제 코드 및 구체적인 구현은
+
+다음 저장소에서 보실 수 있습니다.
 
 https://github.com/SeokminHong/nif-elixir-example
