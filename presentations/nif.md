@@ -54,7 +54,7 @@ int add_int(int a, int b)
 }
 ```
 
-===
+---
 
 ```c++
 // nif_calc.c
@@ -73,7 +73,7 @@ static ERL_NIF_TERM add_int_nif(
 }
 ```
 
-===
+---
 
 ## 용어
 
@@ -83,7 +83,7 @@ static ERL_NIF_TERM add_int_nif(
 - `enif_get_*`: 주어진 term으로부터 원하는 타입의 값을 읽음
 - `enif_make_*`: C의 값을 term으로 인코딩함
 
-===
+---
 
 ```c++
 // nif_calc.c
@@ -95,7 +95,7 @@ static ErlNifFunc nif_funcs[] = {
 ERL_NIF_INIT(Elixir.Calc, nif_funcs, NULL, NULL, NULL, NULL)
 ```
 
-===
+---
 
 ```elixir
 defmodule Calc do
@@ -111,7 +111,7 @@ defmodule Calc do
 end
 ```
 
-===
+---
 
 ## Build / Link
 
@@ -125,7 +125,7 @@ gcc $INCLUDES -shared -o nif_calc.so -fPIC nif_calc.c lib_calc.so
 gcc $INCLUDES -o nif_calc.so -undefined dynamic_lookup -dynamiclib nif_calc.c lib_calc.so
 ```
 
-===
+---
 
 ```elixir
 iex> Calc.add(1, 2)
@@ -148,7 +148,7 @@ iex> Calc.add(1, 2)
 
 https://github.com/rusterlium/rustler
 
-===
+---
 
 ## Rustler
 
@@ -157,7 +157,7 @@ https://github.com/rusterlium/rustler
 - Rust에서 크래시가 발생해도 프로세스가 다운되지 않음
 - 빌드가 간편함
 
-===
+---
 
 ```rust
 #[rustler::nif]
@@ -168,7 +168,7 @@ fn add(a: i64, b: i64) -> i64 {
 rustler::init!("Elixir.Calc", [add]);
 ```
 
-===
+---
 
 ```elixir
 defmodule Calc do
@@ -188,7 +188,7 @@ end
 - Rust의 매크로를 사용
 - 바인딩 코드를 자동 생성
 
-===
+---
 
 ## `cargo-expand`
 
@@ -196,7 +196,7 @@ https://github.com/dtolnay/cargo-expand
 
 - Rust의 매크로를 expand하여 최종 결과를 보여주는 도구
 
-===
+---
 
 ```rust
 pub struct add;
@@ -214,7 +214,7 @@ impl rustler::Nif for add {
 }
 ```
 
-===
+---
 
 ```rust
 let result: std::thread::Result<_> = std::panic::catch_unwind(move || {
@@ -241,7 +241,7 @@ let result: std::thread::Result<_> = std::panic::catch_unwind(move || {
 - 유저 정의 타입에 매크로를 사용하여 변환 가능
 - Rust의 매크로가 encode/decode 로직을 작성해줌
 
-===
+---
 
 ### Enum
 
@@ -255,7 +255,7 @@ pub enum Test {
 }
 ```
 
-===
+---
 
 ### Struct <-> Map
 
@@ -268,7 +268,7 @@ pub struct Test {
 // %{a: integer(), b: float()}
 ```
 
-===
+---
 
 ### Struct <-> Struct
 
@@ -291,7 +291,7 @@ pub struct Test {
 - 함수의 반환 타입은 encode 가능한 타입이면 전부 가능
 - 함수의 반환 타입으로 `NifResult` 허용
 
-===
+---
 
 ```rust
 #[nif]
@@ -308,7 +308,7 @@ def send_message(_pid, _msg), do: error()
 
 <img src="./assets/iex_run_send_msg.png" width="640" >
 
-===
+---
 
 ```rust
 #[nif]
@@ -338,7 +338,7 @@ fn div(a: f64, b: f64) -> NifResult<f64> {
 - Rust는 의존성이 더 많음
 - 빌드 캐시가 되지 않는 CI 환경에서 두드러짐
 
-===
+---
 
 ### `rustler_precompiled`
 
@@ -346,7 +346,7 @@ https://github.com/philss/rustler_precompiled
 
 - 바인딩 crate를 GitHub Releases로부터 바로 가져올 수 있는 라이브러리
 
-===
+---
 
 ```elixir
 defmodule Example.Native do
@@ -364,14 +364,14 @@ defmodule Example.Native do
 end
 ```
 
-===
+---
 
 ### 단점
 
 - 배포 파이프라인에 커스터마이징이 힘듦
 - 아직 개발 초기 단계임
 
-===
+---
 
 ### 직접 구축하자!
 
@@ -379,13 +379,13 @@ end
 - GitHub Releases에 빌드된 파일 추가
 - Elixir 레포지토리에 PR을 자동생성하여, 빌드된 파일을 푸시
 
-===
+---
 
 ### 🌋
 
 <img src="./assets/ci_endless_failure.png" width="320">
 
-===
+---
 
 ### Alpine build
 
@@ -393,7 +393,7 @@ end
 - Ubuntu에서 Rust의 기본 툴체인으로 alpine 타깃 빌드를 하면 `glibc`를 사용함
 - Alpine에는 `glibc`가 없기 때문에 실행 불가능
 
-===
+---
 
 ### `cross`
 
@@ -403,7 +403,7 @@ https://github.com/cross-rs/cross
 - 원하는 타깃의 Docker daemon을 띄워 그 안에서 빌드
 - ✅
 
-===
+---
 
 ### Ubuntu binary size
 
@@ -413,7 +413,7 @@ https://github.com/cross-rs/cross
 - Ubuntu에서 Rust 공유 라이브러리 빌드 시, 디버그 심볼이 들어가는 버그
 - https://users.rust-lang.org/t/binary-is-way-bigger-on-linux-than-on-macos/14814/3
 
-===
+---
 
 ### `strip`
 
@@ -429,7 +429,7 @@ https://github.com/cross-rs/cross
 - NIF는 기본적으로 동기적 함수를 호출하는 것을 전제함
 - 코어 엔진은 비동기 호출 위주인데 가능할까?
 
-===
+---
 
 ```rust
 async fn some_task(task_ended: Callback<SomeTask>) {
@@ -440,7 +440,7 @@ async fn some_task(task_ended: Callback<SomeTask>) {
 
 🤔
 
-===
+---
 
 ```rust
 #[nif]
