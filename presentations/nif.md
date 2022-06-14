@@ -77,8 +77,8 @@ static ERL_NIF_TERM add_int_nif(
 
 ## 용어
 
-- term: Erlang에서 piece of data를 타입에 상관 없이 칭하는 단어
-- env: Erlang terms들의 값이 유효한 환경. env가 유효하면 하위의 term들도 유효함.
+- `term`: Erlang에서 piece of data를 타입에 상관 없이 칭하는 단어
+- `env`: Erlang terms들의 값이 유효한 환경. env가 유효하면 하위의 term들도 유효함.
 
 - `enif_get_*`: 주어진 term으로부터 원하는 타입의 값을 읽음
 - `enif_make_*`: C의 값을 term으로 인코딩함
@@ -251,7 +251,7 @@ pub enum Test {
     A,                   // :a
     B,                   // :b
     Int(i32),            // {:int, integer()}
-    TwoFloats(f64, f64), // {:two_floats, {float(), float()}}
+    TwoFloats(f64, f64), // {:two_floats, float(), float()}
 }
 ```
 
@@ -306,7 +306,7 @@ fn send_message(env: Env, pid: LocalPid, message: String) {
 def send_message(_pid, _msg), do: error()
 ```
 
-<img src="./assets/iex_run_send_msg.png" width="640" >
+<img src="./assets/iex-run-send-msg.png" width="640" >
 
 ---
 
@@ -375,6 +375,7 @@ end
 
 ### 직접 구축하자!
 
+- Rustler의 `load_from` 및 `skip_compilation?` 플래그로 사전에 빌드한 라이브러리를 사용 가능
 - Crate 배포 시 실행할 플랫폼들을 대상으로 빌드
 - GitHub Releases에 빌드된 파일 추가
 - Elixir 레포지토리에 PR을 자동생성하여, 빌드된 파일을 푸시
@@ -383,14 +384,14 @@ end
 
 ### 🌋
 
-<img src="./assets/ci_endless_failure.png" width="320">
+<img src="./assets/ci-endless-failure.png" width="360">
 
 ---
 
 ### Alpine build
 
 - GitHub CI의 Linux 환경은 Ubuntu만 제공
-- Ubuntu에서 Rust의 기본 툴체인으로 alpine 타깃 빌드를 하면 `glibc`를 사용함
+- Ubuntu에서 Rust의 기본 툴체인으로 Alpine 타깃 빌드를 하면 `glibc`를 사용함
 - Alpine에는 `glibc`가 없기 때문에 실행 불가능
 
 ---
@@ -407,7 +408,7 @@ https://github.com/cross-rs/cross
 
 ### Ubuntu binary size
 
-![binay size comparison](./assets/binary_size_comparison.png)
+![binay size comparison](./assets/binary-size-comparison.png)
 
 - Ubuntu에서 빌드할 때 바이너리 크기가 지나치게 큼
 - Ubuntu에서 Rust 공유 라이브러리 빌드 시, 디버그 심볼이 들어가는 버그
@@ -417,10 +418,19 @@ https://github.com/cross-rs/cross
 
 ### `strip`
 
-![stripped size](./assets/stripped_size.png)
+![stripped size](./assets/stripped-size.png)
+
+```sh
+$ strip -S ${LIB_FINAL_NAME}
+```
 
 - 빌드 후 디버그 심볼을 강제로 제거
 - ✅
+
+---
+
+<img src="./assets/release-ci.png" width="480" >
+<img src="./assets/created-pr.png" width="560" >
 
 ---
 
