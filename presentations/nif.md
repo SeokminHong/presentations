@@ -78,8 +78,7 @@ static ERL_NIF_TERM add_int_nif(
 ## 용어
 
 - `term`: Erlang에서 piece of data를 타입에 상관 없이 칭하는 단어
-- `env`: Erlang terms들의 값이 유효한 환경. env가 유효하면 하위의 term들도 유효함.
-
+- `env`: Erlang terms들이 바운드된 environment
 - `enif_get_*`: 주어진 term으로부터 원하는 타입의 값을 읽음
 - `enif_make_*`: C의 값을 term으로 인코딩함
 
