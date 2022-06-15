@@ -471,7 +471,7 @@ impl Callback<SomeTask> {
 ```
 
 ```elixir
-Example.start_some_task()
+Example.start_some_task(self())
 receive do
   {"some_task", payload} -> payload
 end
