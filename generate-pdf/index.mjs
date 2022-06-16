@@ -15,7 +15,11 @@ const server = (() => {
       cleanUrls: true,
       public: "..",
     })
-  ).listen(PORT);
+  )
+    .listen(PORT)
+    .addListener("request", (e) => {
+      console.log(e.url);
+    });
 })();
 
 const files = await promisify(glob)("../presentations/*.html");
