@@ -21,6 +21,7 @@ const files = await promisify(glob)("../presentations/*.html");
 const browser = await puppeteer.launch();
 const printPdfs = files.map(async (file) => {
   const page = await browser.newPage();
+  await page.setViewport({ width: 1920, height: 1080 });
 
   const filePath = path.resolve(process.cwd(), file);
   await page.goto(
@@ -39,6 +40,7 @@ const printPdfs = files.map(async (file) => {
     format: "a4",
     path: `../pdfs/${path.basename(filePath, ".html")}.pdf`,
     printBackground: true,
+    timeout: 120000,
   });
 });
 
