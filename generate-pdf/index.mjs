@@ -20,9 +20,7 @@ const server = (() =>
 const files = await promisify(glob)("../presentations/*.html");
 
 console.log("Launch Puppeteer");
-const browser = await puppeteer.launch({
-  dumpio: true,
-});
+const browser = await puppeteer.launch();
 const printPdfs = files.map(async (file) => {
   console.log(`Create page for ${file}`);
   const page = await browser.newPage();
