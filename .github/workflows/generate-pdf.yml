@@ -30,7 +30,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Generate
-        working-directory: generatePdf
+        working-directory: generate-pdf
         run: |
           npm install
           npm start
