@@ -23,7 +23,7 @@ const printPdfs = files.map(async (file) => {
   const page = await browser.newPage();
 
   const filePath = path.resolve(process.cwd(), file);
-  let res = await page.goto(
+  await page.goto(
     `http://localhost:${PORT}/presentations/${path.basename(
       filePath,
       ".html"
@@ -32,6 +32,7 @@ const printPdfs = files.map(async (file) => {
       waitUntil: "networkidle2",
     }
   );
+  await page.waitForFunction("window.revealLoaded");
 
   mkdirSync("../pdfs", { recursive: true });
   await page.pdf({
