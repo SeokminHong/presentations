@@ -44,7 +44,7 @@ const printPdfs = files.map(async (file) => {
     }
   );
   console.log("Wait for revealLoaded");
-  await page.waitForFunction("window.revealLoaded");
+  await page.waitForFunction("window.revealLoaded", { timeout: 120000 });
 
   mkdirSync("../pdfs", { recursive: true });
   console.log("Generate PDF");
