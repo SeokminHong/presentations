@@ -8,19 +8,14 @@ import handler from "serve-handler";
 
 const PORT = 8125;
 
-const server = (() => {
-  console.log("Start Server");
-  return createServer((req, res) =>
+console.log("Start Server");
+const server = (() =>
+  createServer((req, res) =>
     handler(req, res, {
       cleanUrls: true,
       public: "..",
     })
-  )
-    .listen(PORT)
-    .addListener("request", (e) => {
-      console.log(e.url);
-    });
-})();
+  ).listen(PORT))();
 
 const files = await promisify(glob)("../presentations/*.html");
 
@@ -50,7 +45,6 @@ const printPdfs = files.map(async (file) => {
     }
   );
   console.log("Wait for revealLoaded");
-  console.log(await page.evaluate(`typeof Reveal`));
   await page.waitForFunction("window.revealLoaded");
 
   mkdirSync("../pdfs", { recursive: true });

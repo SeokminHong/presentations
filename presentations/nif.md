@@ -496,3 +496,5 @@ end
 다음 저장소에서 보실 수 있습니다.
 
 https://github.com/SeokminHong/nif-elixir-example
+
+PDF: https://github.com/SeokminHong/presentations/raw/main/pdfs/nif.pdf
