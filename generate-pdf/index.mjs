@@ -50,7 +50,8 @@ const printPdfs = files.map(async (file) => {
     }
   );
   console.log("Wait for revealLoaded");
-  await page.waitForFunction("window.revealLoaded", { timeout: 120000 });
+  console.log(await page.evaluate(`typeof Reveal`));
+  await page.waitForFunction("window.revealLoaded");
 
   mkdirSync("../pdfs", { recursive: true });
   console.log("Generate PDF");
@@ -58,7 +59,6 @@ const printPdfs = files.map(async (file) => {
     format: "a4",
     path: `../pdfs/${path.basename(filePath, ".html")}.pdf`,
     printBackground: true,
-    timeout: 120000,
   });
 });
 
