@@ -36,6 +36,9 @@
       .hljs-meta-string {
         color: #a6e22e;
       }
+      a {
+        word-break: break-all;
+      }
       * {
         --r-selection-background-color: #4d6e84;
         --r-selection-color: initial;
@@ -94,7 +97,6 @@
         for (const li of items) {
           li.classList.add(["fragment"]);
         }
-        console.log("Loaded!!");
         window.revealLoaded = true;
       });
     </script>
