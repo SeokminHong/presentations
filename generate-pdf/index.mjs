@@ -1,6 +1,5 @@
 import puppeteer from "puppeteer";
 import glob from "glob";
-import { promisify } from "util";
 import path from "path";
 import { mkdirSync } from "fs";
 import { createServer } from "http";
@@ -17,7 +16,7 @@ const server = (() =>
     })
   ).listen(PORT))();
 
-const files = await promisify(glob)("../presentations/*.html");
+const files = await glob.sync("../presentations/*.html");
 
 console.log("Launch Puppeteer");
 const browser = await puppeteer.launch();
@@ -27,21 +26,14 @@ const printPdfs = files.map(async (file) => {
   await page.setViewport({ width: 1920, height: 1080 });
 
   const filePath = path.resolve(process.cwd(), file);
-  console.log(
-    `Route to http://localhost:${PORT}/presentations/${path.basename(
-      filePath,
-      ".html"
-    )}?print-pdf`
-  );
-  await page.goto(
-    `http://localhost:${PORT}/presentations/${path.basename(
-      filePath,
-      ".html"
-    )}?print-pdf`,
-    {
-      waitUntil: "networkidle2",
-    }
-  );
+  const url = `http://localhost:${PORT}/presentations/${path.basename(
+    filePath,
+    ".html"
+  )}?print-pdf`;
+  console.log(`Route to ${url}`);
+  await page.goto(url, {
+    waitUntil: "networkidle2",
+  });
   console.log("Wait for revealLoaded");
   await page.waitForFunction("window.revealLoaded");
 
